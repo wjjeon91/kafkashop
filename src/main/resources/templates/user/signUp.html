@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+<h1>Sign Up</h1>
+<form th:action="@{/signup}" method="post">
+    <label for="name">name:</label>
+    <input type="text" id="name" name="name" required>
+    <!-- 이곳에서 다른 필드들도 추가할 수 있습니다. -->
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+    <label for="email">email:</label>
+    <input type="text" id="email" name="email" required>
+    
+    <button type="submit">Sign Up</button>
+</form>
+</body>
+</html>
