@@ -11,13 +11,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${user}">
+            <tr th:each="user : ${users}">
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.name}"></td>
                 <td th:text="${user.email}"></td>
             </tr>
             </tbody>
         </table>
+        <br>
+        <a href="/">홈으로</a>
     </div>
 </div> <!-- /container -->
 </body>

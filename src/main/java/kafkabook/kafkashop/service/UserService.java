@@ -18,7 +18,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Long save(User user){
+    public Long signup(User user){
 
         validateDuplicateUser(user);
 
@@ -30,11 +30,16 @@ public class UserService {
         userRepository.findByName(user.getName()).ifPresent(m->{throw new IllegalStateException("이미 존재하는 회원입니다.");});
     }
 
-    public List<User> findMembers(){
+    public List<User> findUsers(){
         return userRepository.findAll();
     }
 
     public Optional<User> findOne(Long memberId){
         return userRepository.findById(memberId);
+    }
+
+    public User findByName(String name){
+        User user = userRepository.findByName(name).orElseThrow(()->{throw new IllegalStateException("회원 정보 없습니다.");});
+        return user;
     }
 }
