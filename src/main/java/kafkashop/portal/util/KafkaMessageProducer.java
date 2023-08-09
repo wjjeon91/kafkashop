@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class KafkaMessageProducer {
 
     @GetMapping("/kafkaTest")
-    @ResponseBody
+//    @ResponseBody
     public String kafkaTest(){
         // 카프카 클러스터의 주소와 설정을 정의합니다.
         String bootstrapServers = "localhost:9092";
@@ -39,13 +39,16 @@ public class KafkaMessageProducer {
                 producer.send(record);
                 System.out.println("Sent message: " + key + " -> " + value);
             }
-            return "Messages sent successfully!";
+            System.out.println("Messages sent successfully!");
+//            return "Messages sent successfully!";
         } catch (Exception e) {
             e.printStackTrace();
-            return "Failed to send messages!";
+            System.out.println("Failed to send messages!");
+//            return "Failed to send messages!";
         } finally {
             // 프로듀서를 종료합니다.
             producer.close();
+            return "redirect:/";
         }
     }
 }

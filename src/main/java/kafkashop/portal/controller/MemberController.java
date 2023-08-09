@@ -51,7 +51,7 @@ public class MemberController {
 
         memberService.join(member);
 
-        String topic = "member-join-topic";
+        String topic = "member-topic";
         String key = member.getName();
         String message = "join id: "+member.getId() +" name: "+member.getName();
 
@@ -79,7 +79,7 @@ public class MemberController {
         cookie.setPath("/");
         response.addCookie(cookie);
 
-        String topic = "member-login-topic";
+        String topic = "member-topic";
         String key = member.getName();
         String message = "login id: "+member.getId() +" name: "+member.getName();
 
