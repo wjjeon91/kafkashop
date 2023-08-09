@@ -18,7 +18,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public Long signup(Member member){
+    public Long join(Member member){
 
         validateDuplicateMember(member);
 

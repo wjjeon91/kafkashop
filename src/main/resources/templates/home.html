@@ -7,13 +7,13 @@
         <p>회원 기능</p>
         <p>
             <!-- 로그인/로그아웃 링크 -->
-            <a th:if="${not isAuthenticated}" href="/member/signUp">회원 가입</a> <br>
+            <a th:if="${not isAuthenticated}" href="/member/join">회원 가입</a> <br>
             <a th:if="${not isAuthenticated}" href="/member/login">로그인</a>
             <a th:if="${isAuthenticated}" href="/member/logout">로그아웃</a>  <br>
             <a href="/kafka/kafkaTest">카프카 메세지 send</a> <br>
 
             <!-- 회원 목록 링크 -->
-            <a th:if="${#strings.equals(loggedInMembername, 'admin')}" href="/member/memberList">회원 목록</a>
+            <a th:if="${#strings.equals(loggedInMemberName, 'admin')}" href="/member/memberList">회원 목록</a>
         </p>
     </div>
 </div> <!-- /container -->
