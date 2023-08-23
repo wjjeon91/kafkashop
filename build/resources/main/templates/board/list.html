@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Board List</title>
+</head>
+<body>
+<h1>Board List</h1>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Created At</th>
+    </tr>
+    <tr th:each="board : ${boards}">
+        <td th:text="${board.id}"></td>
+        <td><a th:href="@{/board/view/{id}(id=${board.id})}" th:text="${board.title}"></a></td>
+        <td th:text="${board.createdAt}"></td>
+    </tr>
+</table>
+<a th:href="@{/board/write}">Write</a><br>
+<a href="/">홈으로</a>
+</body>
+</html>

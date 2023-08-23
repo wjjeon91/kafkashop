@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <h1>Kafka Shop</h1>
+        <p>회원 기능</p>
+        <p th:if="${isAuthenticated}">
+            <a href="/member/logout">로그아웃</a><br>
+            <a href="/board/list">게시판</a>
+        </p>
+        <p th:if="${not isAuthenticated}">
+            <a href="/member/login">로그인</a> <br>
+            <a href="/member/join">회원 가입</a> <br>
+        </p>
+
+        <p th:if="${#strings.equals(loggedInMemberName, 'admin')}">관리자 기능</p>
+        <p th:if="${#strings.equals(loggedInMemberName, 'admin')}">
+            <a href="/member/memberList">회원 목록</a><br>
+            <a href="/kafka/kafkaTest">카프카 메세지 send</a>
+        </p>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

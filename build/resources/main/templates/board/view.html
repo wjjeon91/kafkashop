@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Board Detail</title>
+</head>
+<body>
+<h1>Board Detail</h1>
+<p>Title: <span th:text="${board.title}"></span></p>
+<p>Content: <span th:text="${board.content}"></span></p>
+<p>Created At: <span th:text="${board.createdAt}"></span></p>
+<p>Write Id: <span th:text="${board.writer.id}"></span></p>
+<p>Write Name: <span th:text="${board.writer.name}"></span></p>
+
+<!-- 수정, 삭제 버튼 -->
+<div th:if="${isEditable}">
+    <a th:href="@{/board/edit/{id}(id=${board.id})}">Edit</a>
+    <a th:href="@{/board/delete/{id}(id=${board.id})}">Delete</a>
+</div>
+
+<a th:href="@{/board/list}">Back to List</a>
+</body>
+</html>

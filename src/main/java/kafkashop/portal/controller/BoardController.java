@@ -7,10 +7,12 @@ import kafkashop.portal.service.MemberService;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.time.LocalDateTime;
 import java.util.Properties;
@@ -86,7 +88,12 @@ public class BoardController {
 
             String topic = "board-topic";
             String key = board.getTitle();
-            String message = "write id: "+board.getId() +" title: "+board.getTitle();
+
+            JSONObject jsonMessage = new JSONObject();
+            jsonMessage.put("method", "write");
+            jsonMessage.put("id", board.getId());
+            jsonMessage.put("title", board.getTitle());
+            String message = jsonMessage.toString();
 
             ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, message);
             producer.send(record);
@@ -142,7 +149,12 @@ public class BoardController {
 
         String topic = "board-topic";
         String key = board.getTitle();
-        String message = "edit id: "+board.getId() +" title: "+board.getTitle();
+
+        JSONObject jsonMessage = new JSONObject();
+        jsonMessage.put("method", "edit");
+        jsonMessage.put("id", board.getId());
+        jsonMessage.put("title", board.getTitle());
+        String message = jsonMessage.toString();
 
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, message);
         producer.send(record);
@@ -172,7 +184,12 @@ public class BoardController {
 
         String topic = "board-topic";
         String key = board.getTitle();
-        String message = "delete id: "+board.getId() +" title: "+board.getTitle();
+
+        JSONObject jsonMessage = new JSONObject();
+        jsonMessage.put("method", "delete");
+        jsonMessage.put("id", board.getId());
+        jsonMessage.put("title", board.getTitle());
+        String message = jsonMessage.toString();
 
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, message);
         producer.send(record);

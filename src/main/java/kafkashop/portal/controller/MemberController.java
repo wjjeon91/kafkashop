@@ -5,8 +5,8 @@ import kafkashop.portal.service.MemberService;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +43,7 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@ModelAttribute Member member, @RequestParam("confirmPassword") String confirmPassword, Model model) {
+    public String join(@ModelAttribute Member member, @RequestParam("confirmPassword") String confirmPassword, Model model){
         if (!member.getPassword().equals(confirmPassword)) {    // 비밀번호 확인
             model.addAttribute("error", "Passwords do not match.");
             return "/member/join";
@@ -53,7 +53,12 @@ public class MemberController {
 
         String topic = "member-topic";
         String key = member.getName();
-        String message = "join id: "+member.getId() +" name: "+member.getName();
+
+        JSONObject jsonMessage = new JSONObject();
+        jsonMessage.put("method", "join");
+        jsonMessage.put("id", member.getId());
+        jsonMessage.put("name", member.getName());
+        String message = jsonMessage.toString();
 
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, message);
         producer.send(record);
@@ -81,7 +86,12 @@ public class MemberController {
 
         String topic = "member-topic";
         String key = member.getName();
-        String message = "login id: "+member.getId() +" name: "+member.getName();
+
+        JSONObject jsonMessage = new JSONObject();
+        jsonMessage.put("method", "login");
+        jsonMessage.put("id", member.getId());
+        jsonMessage.put("name", member.getName());
+        String message = jsonMessage.toString();
 
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, message);
         producer.send(record);
